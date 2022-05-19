@@ -11,9 +11,6 @@ function App() {
   const [mode, setMode] = useState('light') // Whether dark mode  is enabled or not
   const [modeText, setModeText] = useState('Enable Dark Mode');
 
-  // const [greenModes, setGreenModes] = useState('green') // Whether green mode  is enabled or not
-
-
   const [alert, setAlert] = useState(null)
   const showAlert = (message, type) => {
     setAlert({
@@ -25,15 +22,24 @@ function App() {
     }, 3000);
   }
 
+  // const removeBodyClasses = () => {
+  //   document.body.classList.remove('bg-light')
+  //   document.body.classList.remove('bg-dark')
+  //   document.body.classList.remove('bg-warning')
+  //   document.body.classList.remove('bg-danger')
+  //   document.body.classList.remove('bg-success')
+  // }
+
 
   // Start Dark mode chaning function
   const toggleMode = (cls) => {
     if (mode === 'light') {
+      // removeBodyClasses();
+      // document.body.classList.add('bg-' + cls)
       setMode('dark')
       setModeText('Enable Light Mode')
       document.body.style.backgroundColor = "#042743"
       document.body.style.color = "white";
-      // document.title = "TextUtils - Dark Mode"
       showAlert("Dark of is enable sucessfully", "success")
 
       // setInterval(() => {
@@ -48,24 +54,9 @@ function App() {
       setModeText('Enable Dark Mode')
       document.body.style.backgroundColor = "white"
       document.body.style.color = "black";
-      // document.title = "TextUtils - Light Mode"
       showAlert("Light of is enable sucessfully", "success")
     }
   }
-  // End Dark mode chaning function
-
-  // Start of Green mode chaning function
-  // const toggle = () => {
-  //   if (greenModes === 'green') {
-  //     document.body.style.backgroundColor = "#062E03"
-  //   }else{
-  //     document.body.style.backgroundColor = "white"
-  //     document.body.style.color = "black";
-  //   }
-  // }
-
-  // End of Green mode chaning function
-
 
   return (
     <>
@@ -74,7 +65,6 @@ function App() {
         <Navbar title="TextUtils" about="About Us" mode={mode} toggleMode={toggleMode} modeText={modeText} />
         <Alert alert={alert} />
         <div className="container">
-          {/* <TextForm heading="Enter the text to analyze below" mode={mode} /> */}
           <Routes>
             <Route exact path="/" element={<TextForm heading=" Try TextUtils - Word Counter, Character Counter, Remove extra Spaces" mode={mode} showAlert={showAlert} />} />
             <Route exact path="/about" element={<About mode={mode} />} />

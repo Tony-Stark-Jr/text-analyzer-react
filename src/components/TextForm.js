@@ -6,16 +6,12 @@ export default function TextForm(props) {
     // setText=("new Text"); // Correct way to change the state
 
     const toAllUpperCase = () => {
-        // console.log("Uppercasse was clicked");
         let upperCase = text.toUpperCase();
         setText(upperCase)
         props.showAlert("Converted to uppercase!", "success");
     }
 
     const toAllLowerCase = () => {
-        // console.log("Uppercasse was clicked");
-        // string.charAt(0).toUpperCase() + string.slice(1)
-        // console.log("you click");
         let capitalText = text.toLowerCase();
         setText(capitalText)
         props.showAlert("Converted to uppercase!", "success");
@@ -27,15 +23,13 @@ export default function TextForm(props) {
         props.showAlert("Text Cleared!", "success");
     }
 
-    // const toSave = () => {
-    //     localStorage.setItem(setText, Date.now());
-    // }
-
     const handleCopy = () => {
-        var text = document.getElementById("myBox");
-        text.select();
-        navigator.clipboard.writeText(text.value);
-        document.getSelection().removeAllRanges();
+        // var text = document.getElementById("myBox");
+        // text.select();
+        // navigator.clipboard.writeText(text.value);
+        // document.getSelection().removeAllRanges();
+        navigator.clipboard.writeText(text);
+
         props.showAlert("Copied to clipboard", "success");
     }
 
@@ -46,7 +40,6 @@ export default function TextForm(props) {
     }
 
     const handleOnChange = (event) => {
-        // console.log("Uppercasse was clicked");
         setText(event.target.value)
     }
 
@@ -61,8 +54,6 @@ export default function TextForm(props) {
 
                 <button disabled={text.length === 0} className="btn btn-primary mb-2 my-2" onClick={toClHandle}>To clear</button>
 
-                {/* <button className="btn btn-primary my-3 mx-3" onClick={toSave}>To Save</button> */}
-
                 <button disabled={text.length === 0} className="btn btn-primary mb-2 my-2 mx-2" onClick={handleCopy}>To Copy</button>
 
                 <button disabled={text.length === 0} className="btn btn-primary mb-2 my-2" onClick={handleExtraSpace}>To extra remove spaces</button>
@@ -74,7 +65,7 @@ export default function TextForm(props) {
 
             <div className='my-4'>
                 <h1>Your text Summary</h1>
-                <p>{text.split(" ").filter((element) => { return element.length !== 0 }).length} words and {text.length} characters and {text.split(".").length - 1} sentences</p>
+                <p>{text.split(/\s+/).filter((element) => { return element.length !== 0 }).length} words and {text.length} characters and {text.split(".").length - 1} sentences</p>
                 <p>{text.split(" ").filter((element) => { return element.length !== 0 }).length * 0.008} Minutes to read</p>
                 <h2>Preview</h2>
                 <p>{text.length > 0 ? text : "Nothing is preveiw!!!"}</p>
